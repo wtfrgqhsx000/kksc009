@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的网站</title>
+
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">服务</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- 闪存消息显示区域 -->
+    {% if get_flashed_messages(with_categories=true) %}
+    <ul class="flash-messages">
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+        <li class="flash-message flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- 页面主要内容 -->
+    <h1>欢迎来到我的网站</h1>
+    <div class="login-container">
+        {% if is_logged_in %}
+        <p>您已登录。</p>
+        <a href="{{ url_for('logout') }}">登出</a> {% else %}
+        <p>请点击下面的链接进行登录或注册：</p>
+        <a href="{{ url_for('login') }}">登录</a>
+        <a href="{{ url_for('register') }}">注册</a> {% endif %}
+    </div>
+</body>
+
+</html>
